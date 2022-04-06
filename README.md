@@ -23,8 +23,8 @@ git clone https://github.com/JamBushell/Arm-Control
 
 4. Run this file using 
 ```bash
-node www```
-
+node www
+```
 
 5. Then find your local ip address (look up if you don't know how)
 
