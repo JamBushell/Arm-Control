@@ -1,4 +1,3 @@
-import { ArmBase } from "./arm";
 
 window.onload = init;
 

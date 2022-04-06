@@ -171,29 +171,34 @@ export class arm extends THREE.Group {
         let theta = this.coords.Angle;
         let gamma = this.coords.Pitch;
 
-        // Redo angles system around axes not arm starting position.
-        // Convert A and B angle to Control angles (dat gui controls)
-        // Check up on base offsets (might not be 4.5)
-        // Correct Rounding Errors
-        // Figure out how to onclude wrist
-        let wristVector = new THREE.Vector3(this.limb3.length + 1, 0, 0);
-        wristVector.applyAxisAngle(new THREE.Vector3(0, 0, 1), (gamma * PI)/180)
-        wristVector.applyAxisAngle(new THREE.Vector3(0, 1, 0), (theta * PI)/180)
+
+        let wristVector = new THREE.Vector3(this.limb3.length + 1, 0, 0); //  vertical vector
+        wristVector.applyAxisAngle(new THREE.Vector3(0, 0, 1), (gamma * PI)/180) // rotate by pitch
+        wristVector.applyAxisAngle(new THREE.Vector3(0, 1, 0), (theta * PI)/180) //rotate byt angle
+
+
         let desiredVector = new THREE.Vector3(x,y,z);
-        let elbowVector = desiredVector.sub(wristVector);
-        console.log(elbowVector);
+        let elbowVector = desiredVector.sub(wristVector); // vector from shoulder to elbow
         elbowVector.sub(new THREE.Vector3(0, 4.5, 0))
+
+
         let shoulderRot = Math.atan2(-elbowVector.z, elbowVector.x)
-        let deltaW = Math.sqrt((elbowVector.z) * (elbowVector.z) + elbowVector.x * elbowVector.x);
+
+        let deltaW = Math.sqrt((elbowVector.z) * (elbowVector.z) + elbowVector.x * elbowVector.x); // magnitude of elbow vector projected on x-z plane
         let deltaY = elbowVector.y;
-        let A_prime = Math.atan(deltaY/deltaW);
+        let A_prime = Math.atan(deltaY/deltaW); // angle between elbow pos and shoulder\
+
+        // solve for elbow and shoulder angle with TRIGONOMETRY
         let A = Math.acos(((elbowVector.length() * elbowVector.length() + this.limb1.length * this.limb1.length - this.limb2.length * this.limb2.length)/(2*elbowVector.length()*this.limb1.length)))
         A = A + A_prime;
         let B = PI - Math.acos(((this.limb2.length * this.limb2.length + this.limb1.length * this.limb1.length - elbowVector.length() * elbowVector.length())/(2 * this.limb2.length * this.limb1.length)))
 
-        console.log(`a=${A* 180/PI}, b=${B * 180/PI}, shoulderRot = ${shoulderRot * 180/PI}`);
 
-        if (shoulderRot < 0) { shoulderRot += 2 * PI};
+
+        if (shoulderRot < 0) { shoulderRot += 2 * PI}; // normalize shoulder rotation between 0 < x < 360
+
+        // apply angles
+
         this.shoulderRot.angle = shoulderRot * 180 / PI;
         this.shoulderExt.angle = A * 180/PI;
         this.elbowExt.angle = -B * 180/PI;
@@ -208,30 +213,28 @@ export class arm extends THREE.Group {
 
         
 
-        let wristFlexion = limb2Vector.angleTo(wristVector);
-        console.log(`Wrist Flexion: ${wristFlexion * 180 / PI}`);
+        let wristFlexion = limb2Vector.angleTo(wristVector);  // this made sense for why it works when i wrote it but it works so who cares
         this.WristFlex.angle = wristFlexion * 180 / PI;
         this.flexWrist();
 
 
-        let limb3Vector = new THREE.Vector3(0, this.limb3.length + 1, 0)
+        let limb3Vector = new THREE.Vector3(0, this.limb3.length + 1, 0) // find wrist current vector
         limb3Vector.applyQuaternion(this.wrist.quaternion)
         limb3Vector.applyQuaternion(this.elbow.quaternion)
         limb3Vector.applyQuaternion(this.shoulder.quaternion)
 
-        let a = limb3Vector.normalize();
-        let b = wristVector.normalize();
-        let u = limb2Vector.normalize();
 
 
-        let c = a.sub(u.clone().multiplyScalar(a.dot(u)));
+        let u = limb2Vector.normalize()
+        let b = wristVector.normalize()
+        let c = limb3Vector.normalize().projectOnPlane(u) // find vector on plane perpendicular to wrist joint
         let e = c.normalize();
         
-        let f = new THREE.Vector3().crossVectors(u, e);
+        let f = new THREE.Vector3().crossVectors(u, e); // find vector orthogonal to elbow and e
 
-        let wristRot = Math.atan2(b.dot(f), b.dot(e));
-        console.log(`Wrist Rotation = ${wristRot * 180/PI}`);
+        let wristRot = Math.atan2(b.dot(f), b.dot(e)); // find angle between orthogonal vectors, solving for rotation change required (still dont know why)  
 
+        //apply angles
         this.WristRot.angle += wristRot * 180/PI;
         this.rotateWrist();
     }
