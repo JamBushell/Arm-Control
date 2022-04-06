@@ -7,9 +7,9 @@ Robotic Arm control web program, basic scaffold, work in progress
 
 # Installation
 Run git clone function (make sure you have git installed)
-'''bash
+```bash
 git clone https://github.com/JamBushell/Arm-Control
-'''
+```
 
 # Running
 1. Have node installed, and git (obviously)
@@ -21,15 +21,15 @@ git clone https://github.com/JamBushell/Arm-Control
 3. Locate the bin->www file
 
 
-Run this file using 
-'''bash
-node www'''
+4. Run this file using 
+```bash
+node www```
 
 
-Then find your local ip address (look up if you don't know how)
+5. Then find your local ip address (look up if you don't know how)
 
 
-Open browser of your choice (preferably chrome)
+6. Open browser of your choice (preferably chrome)
 
 
-And navigate to YourIP:3000
+7. And navigate to htttp://YourIP:3000
