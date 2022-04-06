@@ -12,16 +12,18 @@ git clone https://github.com/JamBushell/Arm-Control
 '''
 
 # Running
-Have node installed, and git (obviously)
+1. Have node installed, and git (obviously)
 
 
-Clone this git into whichever folder you wish
+2. Clone this git into whichever folder you wish
 
 
-Locate the bin->www file
+3. Locate the bin->www file
 
 
-Run this file using the "node www" command
+Run this file using 
+'''bash
+node www'''
 
 
 Then find your local ip address (look up if you don't know how)
