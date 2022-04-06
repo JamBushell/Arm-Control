@@ -1,0 +1,271 @@
+:root {
+    --background: rgb(27, 26, 26);
+    --sideBackground: rgb(40, 40, 40);
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    background-color: var(--background);
+    color: white;
+    font-family: Calibri;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 0px;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.body-grid-container {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    grid-template-rows: 40px 1fr 20px;
+    grid-template-areas: 
+    "side-nav header"
+    "side-nav main"
+    "side-nav footer";
+    height: 100vh;
+    
+
+}
+
+canvas {
+    display: block;
+}
+
+::-webkit-scrollbar
+{
+	width: 0px;
+	background-color:transparent;
+    
+}j
+
+
+
+
+::-webkit-scrollbar-thumb:hover {
+    cursor: pointer;
+}
+
+
+.raise:hover, .raise:focus {
+  border-top: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  box-shadow: 0px 0px 15px -3px black;
+  transform: translateY(-4px); 
+}
+
+button {
+    border: none;
+    outline: none;
+}
+
+
+.nav-button {
+    position: relative;
+    height: 45px;
+    background: linear-gradient(to right, #1d1d1d 50%, transparent 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    
+    
+    font: inherit;  
+    font-size: large;
+    white-space: nowrap;
+    font-weight: 100;
+    line-height: 1;
+    margin: auto;
+    padding: 1em 1.5em;
+    transition: all 0.4s ease-out;
+    width: 100%;
+    
+    
+}
+
+a {
+    font: inherit;  
+    font-size: large;
+    white-space: nowrap;
+    font-weight: 100;
+    line-height: 1;
+    text-decoration: none;
+    color: inherit;
+
+}
+
+#sim {
+    width: 100%;
+    height: 90%;
+}
+
+.nav-button:hover {
+    cursor: pointer;
+    padding: 16px 25px;
+    background-position: left bottom;
+}
+
+*,*:focus,*:hover{
+    outline:none;
+}
+
+#licensing {
+    color: #91BAD6;
+}
+
+
+
+#help {
+     color: #91BAD6;
+}
+
+
+
+#files {
+    color: #91BAD6;
+    
+}
+
+
+
+#auto {
+    color:  #91BAD6;
+    
+}
+
+#control {
+    color: #91BAD6;
+    
+}
+
+
+
+#dash {
+    color: #91BAD6;
+}
+
+
+.content-frame {
+    margin-left: 10px;
+    background-color: var(--background);
+    width: 100%;
+    height: 100%;
+}
+  
+
+ul.nav-list {
+    position: relative;
+    right: 0px;
+    list-style-type: none;
+    padding: 15px 5px;
+    transition: right 350ms ease;
+    margin-top: 0;
+    
+}
+
+
+
+li.nav-item {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    padding: 5px 0px;
+}
+.header {
+    grid-area: header;
+    background-color:  	#1e1e1e;
+
+}   
+
+.side-nav {
+    grid-area: side-nav;
+    transition: width 350ms ease;
+    width: 180px;
+    background-image: url("../images/Robotic Arm 3d Outline.png");
+    background-color: rgb(40, 40, 40);
+    background-position: bottom;
+    background-size: 200px auto;
+    background-repeat: no-repeat;
+    max-height: max-content;
+    overflow: auto;
+    box-shadow: 5px 0px 10px -5px black;
+    border-radius: 0 20px 20px 0;
+    z-index: 999;
+}
+
+.logo {
+    font-size: 30px;
+    height: 40px;
+}
+
+.closed-nav {
+    grid-area: side-nav;
+    transition: width 350ms ease;
+    background-image: url("Robotic Arm 3d Outline.png");
+    background-color: rgb(40, 40, 40);
+    background-position: bottom;
+    background-size: 200px auto;
+    background-repeat: no-repeat;
+    width: 50px;
+    background-color: var(--sideBackground);
+    max-height: max-content;
+    overflow: auto;
+    box-shadow: 5px 0px 10px -5px black;
+    border-radius: 0 20px 20px 0;
+    z-index: 999;
+}
+
+.closed-nav ul.nav-list {
+    right: 120px;
+    transition: right 350ms ease;
+}
+.main {
+    grid-area: main;
+    background-color: black;
+    
+}
+
+.header {
+    text-align: center;
+    font-size: 2rem;
+}
+
+button.close-button {
+    background-color: transparent;
+    border: none;
+    font-size: 1.4rem;
+    padding-right: 10px;
+    position: relative;
+    right: 10px;
+    top: 10px;
+    
+}
+
+hr {
+    border-top: 1px solid white;
+    border-bottom: none;
+    border-right: none;
+    border-left: none;
+
+    
+    
+    
+    margin: 10px 25px;
+}
+
+button.close-button:hover {
+   color:rgb(113, 178, 238)
+}
+button.close-button:active {
+    color:rgb(247, 247, 247)
+ }
+
+.close-button-flex-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.footer {
+    display: relative;
+    grid-area: footer;
+    background-color:  	#1e1e1e;
+}

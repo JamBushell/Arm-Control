@@ -1,0 +1,44 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href="/stylesheets/main.css")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js")
+    script(src="../javascripts/orbitcontrols.js")
+    script(src="../javascripts/arm.js", type="module") 
+    script(src="../javascripts/gripper.js", type="module") 
+    script(src="../javascripts/limb.js", type="module") 
+    script(src="../javascripts/main-script.js") 
+    script(src="../javascripts/main.js", type="module") 
+  body 
+    .body-grid-container
+      header.header#header 
+      aside.side-nav#side-bar 
+        .logo 
+          .close-button-flex-container 
+            button.close-button#close-button 
+              span &#10006
+        ul.nav-list 
+          li.nav-item
+          button.raise.nav-button#dash 
+            a(href="/home") Dashboard 
+          li.nav-item
+          button.raise.nav-button#control 
+            a(href="/control") Control 
+          li.nav-item
+          button.raise.nav-button#auto 
+            a(href="/auto") Auto Mode (coming soon) 
+          li.nav-item
+          button.raise.nav-button#files 
+            a(href="/files") Files 
+          li.nav-item
+          button.raise.nav-button#help 
+            a(href="/help") Help 
+          li.nav-item
+          button.raise.nav-button#licensing 
+            a(href="/licensing") Licensing 
+      main.main#content
+        block content
+      footer.footer#footer
